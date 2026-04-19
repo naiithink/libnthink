@@ -35,6 +35,7 @@ $(error Unable to identify OS)
 endif
 
 LIB_STATIC := $(BASENAME).a
+LIBS := $(addprefix $(BUILD_DIR)/$(LIB_DIR)/,$(LIB_BASE) $(LIB_MAJOR) $(LIB_VERSION))
 SOURCES := $(shell find $(SOURCE_DIR) -type f)
 INCLUDES := $(shell find $(INCLUDE_DIR) -type f)
 OBJECTS := $(patsubst $(SOURCE_DIR)/%.c,$(BUILD_DIR)/$(OBJECT_DIR)/%.o,$(SOURCES))
@@ -46,8 +47,9 @@ all: config lib_static lib_dynamic
 
 .PHONY: lib_dynamic
 lib_dynamic: $(SOURCES) $(INCLUDES)
-	$(CC) $(CFLAGS) -fPIC -shared $(LDFLAGS) -compatibility_version $(MAJOR_VERSION) -current_version $(VERSION) -o $(BUILD_DIR)/$(LIB_DIR)/$(LIB_VERSION) $(SOURCES)
+	$(CC) $(CFLAGS) -fPIC -shared $(LDFLAGS) -o $(BUILD_DIR)/$(LIB_DIR)/$(LIB_VERSION) $(SOURCES)
 	ln -sf $(LIB_VERSION) $(BUILD_DIR)/$(LIB_DIR)/$(LIB_BASE)
+	ln -sf $(LIB_VERSION) $(BUILD_DIR)/$(LIB_DIR)/$(LIB_MAJOR)
 
 
 .PHONY: lib_static
