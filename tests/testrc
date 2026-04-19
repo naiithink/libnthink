@@ -1,0 +1,11 @@
+PROJECT_PATH="$(realpath ..)"
+BUILT_LIB_DIR_PATH="${PROJECT_PATH}/build/lib"
+UNAME_S=$(uname -s)
+
+if [[ "$UNAME_S" = "Linux" ]]; then
+    export LD_LIBRARY_PATH="${BUILT_LIB_DIR_PATH}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+elif [[ "$UNAME_S" = "Darwin" ]]; then
+    export DYLD_LIBRARY_PATH="${BUILT_LIB_DIR_PATH}${DYLD_LIBRARY_PATH:+:${DYLD_LIBRARY_PATH}}"
+else
+    echo "Unable to identify OS" >&2
+fi
