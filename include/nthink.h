@@ -39,7 +39,29 @@
 extern "C" {
 #endif /* __cplusplus */
 
-void greet(char *restrict);
+#include <stdio.h>
+
+#define eprint(s) fputs(s, stderr)
+
+#define eprint_at(s) do { \
+    const char *_s = (s); \
+    fprintf(stderr, "%s:%d: %s", __func__, __LINE__, (_s) ? (_s) : "(null)"); \
+} while (0)
+
+#ifdef EXPERIMENTAL
+#define BUF_SIZE 256
+
+#define eprintf(fmt, ...) fprintf(stderr, fmt __VA_OPT__(,) __VA_ARGS__)
+
+#define eprintf_at(fmt, ...) do { \
+    char _buf[BUF_SIZE]; \
+    snprintf(_buf, sizeof(_buf), fmt __VA_OPT__(,) __VA_ARGS__); \
+    fprintf(stderr, "%s:%d: %s", __func__, __LINE__, _buf); \
+} while (0)
+#endif /* EXPERIMENTAL */
+
+void
+greet(char *restrict);
 
 #ifdef __cplusplus
 }

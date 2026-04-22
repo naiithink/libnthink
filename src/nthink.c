@@ -35,7 +35,8 @@
 
 #include "../include/nthink.h"
 
-void greet(char *restrict name)
+void
+greet(char *restrict name)
 {
     printf("hello, %s\n", name);
 }

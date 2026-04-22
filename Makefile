@@ -3,7 +3,7 @@ VERSION := 0.1.0
 MAJOR_VERSION := $(word 1,$(subst ., ,$(VERSION)))
 
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -pedantic -std=c17
+CFLAGS := -Wall -Wextra -Werror -pedantic -std=c23
 
 # Installation directory (~/.local by default)
 DESTDIR ?= ~/.local
