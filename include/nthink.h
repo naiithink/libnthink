@@ -34,6 +34,15 @@
 #ifndef NTHINK_H
 
 #define NTHINK_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void greet(char *restrict);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif /* NTHINK_H */
