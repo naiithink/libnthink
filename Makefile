@@ -10,7 +10,7 @@ DESTDIR ?= ~/.local
 BUILD_DIR ?= build
 LIB_DIR ?= lib
 OBJECT_DIR ?= obj
-TEST_DIR := tests
+EXAMPLE_DIR := examples
 SOURCE_DIR := src
 INCLUDE_DIR := include
 
@@ -66,15 +66,15 @@ config:
 	@install -m 644 $(INCLUDES) $(BUILD_DIR)/$(INCLUDE_DIR)
 
 
-.PHONY: tests
-tests:
-	$(MAKE) -C $(TEST_DIR)
+.PHONY: examples
+examples:
+	$(MAKE) -C $(EXAMPLE_DIR)
 
 
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR)/*
-	$(MAKE) -C $(TEST_DIR) clean
+	$(MAKE) -C $(EXAMPLE_DIR) clean
 
 
 .PHONY: install
